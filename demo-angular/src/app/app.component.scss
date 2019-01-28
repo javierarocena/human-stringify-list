@@ -1,13 +1,24 @@
 h1 {
-  background-color: black;
-  padding: 70px;
+  color: black;
+  background-color: #e8e8e8;
+  padding: 40px;
   font-family: arial;
-  font-size: 4em;
+  font-size: 1.6em;
   margin: 0;
   display: inline-block;
   border-radius: 9px;
-  width: 140px;
+  width: 450px;
   text-align: center;
+  height: 300px;
+}
+
+h2 {
+  color: #808080;
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+  padding: 0 34px;
+  margin: 0;
 }
 
 section.wrapper {

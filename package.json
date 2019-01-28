@@ -1,6 +1,6 @@
 {
   "name": "human-stringify-list",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "An ultra lightweight Vanilla JS library that converts a success percentage in the relevant color",
   "main": "index.js",
   "scripts": {

@@ -1,9 +1,11 @@
+"use strict";
+exports.__esModule = true;
 var HumanListSettings = /** @class */ (function () {
     function HumanListSettings(settings) {
         if (settings === void 0) { settings = {}; }
         this.items_name = settings.items_name || "items";
         this.item_name = settings.item_name || "item";
-        this.max_available_to_count = settings["max_available_to_count"] || 5;
+        this.max_available_to_count = settings["max_available_to_count"] || 7;
         this.no_items_msg = settings.no_items_msg || "No hay items";
         this.and_separator = settings.and_separator || "y";
         this.comma_separator = settings.comma_separator || ",";
@@ -11,17 +13,19 @@ var HumanListSettings = /** @class */ (function () {
     return HumanListSettings;
 }());
 var HumanList = /** @class */ (function () {
-    function HumanList(settings) {
+    function HumanList(items, settings) {
+        this.items = items;
         this.settings = new HumanListSettings(settings);
         return this;
     }
     HumanList.prototype.stringlyList = function (items, settings) {
+        if (items === void 0) { items = this.items; }
         if (settings === void 0) { settings = this.settings; }
         if (!items.length) {
             return settings.no_items_msg;
         }
         if (items.length > settings.max_available_to_count) {
-            return settings.max_available_to_count + " " + settings.items_name;
+            return items.length + " " + settings.items_name;
         }
         if (items.length === 1) {
             return items[0];
@@ -46,66 +50,20 @@ var HumanList = /** @class */ (function () {
     return HumanList;
 }());
 var HumanProductList = /** @class */ (function () {
-    function HumanProductList() {
+    function HumanProductList(items, settings) {
+        this.product_list = [];
+        this.settings = settings;
     }
+    HumanProductList.prototype.stringly = function () {
+        return new HumanList(this.product_list, this.settings).stringlyList();
+    };
     return HumanProductList;
 }());
 function getHumanStringList(items, settings) {
-    return new HumanList().stringlyList(items);
+    return new HumanList(items, settings).stringlyList();
 }
+exports.getHumanStringList = getHumanStringList;
 function getHumanProductList(items, settings) {
-    var list = [];
-    items.map(function (item) {
-        if (item.cant > 0)
-            list.push(" " + item.cant + " " + (item.cant == 1 ? item.name : item.names));
-    });
-    return new HumanList(settings).stringlyList(list);
+    return new HumanProductList(items, settings).stringly();
 }
-console.log(getHumanStringList(["manzana"], {
-    items_name: "frutas"
-}));
-console.log(getHumanStringList([], {
-    no_items_msg: "Ahora mismo no hay fruta"
-}));
-console.log(getHumanStringList(["manzana", "lechuga"]));
-console.log(getHumanStringList(["manzana", "lechuga", "queso"]));
-console.log(getHumanStringList(["manzana", "pimiento", "aceite", "lechuga", "queso"]));
-console.log(getHumanStringList([
-    "manzana",
-    "pimiento",
-    "aceite",
-    "lechuga",
-    "mermelada",
-    "tomate",
-    "sal",
-    "vinagre",
-    "maiz",
-    "queso"
-], {
-    items_name: "frutas"
-}));
-console.log("------------");
-console.log(getHumanProductList([
-    {
-        names: "Manzanas",
-        name: "Manzana",
-        cant: 3
-    },
-    {
-        names: "Lechugas",
-        name: "Lechuga",
-        cant: 2
-    },
-    {
-        names: "Kiwis",
-        name: "Kiwi",
-        cant: 7
-    },
-    {
-        names: "Almendras",
-        name: "Almendra",
-        cant: 1
-    }
-], {
-    and_separator: "&"
-}));
+exports.getHumanProductList = getHumanProductList;

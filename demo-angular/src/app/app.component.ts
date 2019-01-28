@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 
 import { getRgbColorAsSucess, getRgbaColorAsSucess } from "coloured-success";
 import { Options } from "ng5-slider";
+import { getHumanStringList, getHumanProductList } from "human-stringify-list";
 
 @Component({
   selector: "app-root",
@@ -9,39 +10,44 @@ import { Options } from "ng5-slider";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  success: number = 50;
+  porcent: number = 0;
 
-  metrics = [89, 12, 94, 99, 63, 36, 54];
-
-  grades = [
-    {
-      text: "A+",
-      value: 100
-    },
-    {
-      text: "B",
-      value: 70
-    },
-    {
-      text: "C",
-      value: 50
-    },
-    {
-      text: "D",
-      value: 30
-    },
-    {
-      text: "F",
-      value: 10
-    }
+  list: string[] = [
+    "Cheese",
+    "tomato",
+    "pepperoni",
+    "egg",
+    "oregano",
+    "olive",
+    "cucumber",
+    "pepper",
+    "ham",
+    "seafood",
+    "garlic",
+    "pineapple"
   ];
 
-  rgbaWrapepr(succes: number, alpha = 1) {
-    return getRgbaColorAsSucess(succes, alpha);
+  filterList(list: string[], value: number) {
+    let list_filtered = [];
+    for (let i = 0; i < 0 + value; i++) {
+      list_filtered.push(list[i]);
+    }
+    return list_filtered;
+  }
+
+  generateList(list: string[], value: number) {
+    let list_filtered = [];
+    for (let i = 0; i < 0 + value; i++) {
+      list_filtered.push(list[i]);
+    }
+    return getHumanStringList(list_filtered, {
+      no_items_msg: "No hay ingredientes"
+    });
   }
 
   options: Options = {
     floor: 0,
-    ceil: 100
+    step: 1,
+    ceil: this.list.length
   };
 }
