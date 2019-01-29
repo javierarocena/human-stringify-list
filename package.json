@@ -1,6 +1,6 @@
 {
   "name": "human-stringify-list",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An ultra lightweight Vanilla JS library that converts a success percentage in the relevant color",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,13 @@
   },
   "keywords": [
     "javascript",
-    "color",
-    "success",
-    "coloured"
+    "list",
+    "array",
+    "readable",
+    "human",
+    "angular",
+    "typescript",
+    "convert"
   ],
   "author": "Javier Arocena",
   "license": "MIT",
